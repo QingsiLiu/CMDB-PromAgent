@@ -1,0 +1,10 @@
+---
+addr: http://localhost:9090
+server:
+  token: xxx
+  addr: https://localhost/
+log:
+  filename: logs/promagent.log
+  maxbackups: 7
+  maxsize: 5
+  compress: true
