@@ -24,8 +24,15 @@ type LogConfig struct {
 
 type TaskConfig struct {
 	Register RegisterConfig `mapstructure:"register"`
+	Profile  ProfileConfig  `mapstructure:"profile"`
 }
 
 type RegisterConfig struct {
 	Interval time.Duration `mapstructure:"interval"`
+}
+
+type ProfileConfig struct {
+	Interval time.Duration `mapstructure:"interval"`
+	Tpl      string        `mapstructure:"tpl"`
+	Output   string        `mapstructure:"output"`
 }

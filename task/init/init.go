@@ -2,9 +2,11 @@ package init
 
 import (
 	"promagent/task"
-	"promagent/task/plugins"
+	"promagent/task/plugins/profile"
+	"promagent/task/plugins/register"
 )
 
 func init() {
-	task.Register("register", &plugins.Register{})
+	task.Register("register", &register.Register{})
+	task.Register("profile", &profile.Profile{})
 }

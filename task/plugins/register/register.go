@@ -1,9 +1,11 @@
-package plugins
+package register
 
 import (
+	"crypto/tls"
 	"fmt"
 	"github.com/imroc/req"
 	"github.com/sirupsen/logrus"
+	"net/http"
 	"os"
 	"promagent/config"
 	"strings"
@@ -35,16 +37,22 @@ func (r *Register) Run() {
 		"Authorization": fmt.Sprintf("Token %s", r.config.ServerConfig.Token),
 	}
 
+	// 跳过不安全的验证（https证书）
+	request := req.New()
+	transport, _ := request.Client().Transport.(*http.Transport)
+	transport.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+
 	for {
 		// 先执行，后阻塞
-		response, err := req.Post(api, params, headers)
+		response, err := request.Post(api, req.BodyJSON(params), headers)
 		if err != nil {
 			logrus.WithFields(logrus.Fields{
 				"error": err.Error(),
 			}).Error("request register--->req response err!!!")
 		} else {
+			body, _ := response.ToString()
 			logrus.WithFields(logrus.Fields{
-				"response": response.Dump(),
+				"response": body,
 			}).Debug("request register--->req response success!!!")
 		}
 		<-ticker.C

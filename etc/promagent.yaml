@@ -10,4 +10,8 @@ log:
   compress: true
 task:
   register:
-    interval: 3s
+    interval: 1m
+  profile:
+    interval: 10s
+    tpl: ./etc/prometheus/prometheus.yml.tpl
+    output: ./etc/prometheus/prometheus.yml
