@@ -3,7 +3,11 @@
    
 Agent:
     UUID
-    Addr http://host:port/path 
+    Addr http://host:port/path
+
+Task
+    Init
+    Run()
 
     LogConfig
     ServerConfig

@@ -8,3 +8,6 @@ log:
   maxbackups: 7
   maxsize: 5
   compress: true
+task:
+  register:
+    interval: 3s

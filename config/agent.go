@@ -1,10 +1,13 @@
 package config
 
+import "time"
+
 type AgentConfig struct {
-	UUID         string        `mapstructure:"_"`
+	UUID         string        `mapstructure:"-"`
 	Addr         string        `mapstructure:"addr"`
 	ServerConfig *ServerConfig `mapstructure:"server"`
 	LogConfig    *LogConfig    `mapstructure:"log"`
+	TaskConfig   *TaskConfig   `mapstructure:"task"`
 }
 
 type ServerConfig struct {
@@ -17,4 +20,12 @@ type LogConfig struct {
 	Maxsize    int    `mapstructure:"maxsize"`
 	Maxbackups int    `mapstructure:"maxbackups"`
 	Compress   bool   `mapstructure:"compress"`
+}
+
+type TaskConfig struct {
+	Register RegisterConfig `mapstructure:"register"`
+}
+
+type RegisterConfig struct {
+	Interval time.Duration `mapstructure:"interval"`
 }
